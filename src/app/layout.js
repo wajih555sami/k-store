@@ -1,7 +1,26 @@
-import './globals.css'
+'use client'
+
+
+import './globals.scss'
 import { Inter } from 'next/font/google'
+import { ThemeProvider, createTheme } from '@mui/material'
+import Header from './components/Header'
 
 const inter = Inter({ subsets: ['latin'] })
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1976D2', // Customize the primary color
+    },
+    secondary: {
+      main: '#FF4081', // Customize the secondary color
+    },
+  },
+  typography: {
+    fontFamily: 'Roboto, Arial, sans-serif', // Customize the default font family
+  },
+});
+
 
 export const metadata = {
   title: 'Create Next App',
@@ -11,7 +30,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <ThemeProvider theme={theme}>
+        <body className={inter.className}>
+          <header className="header-sec">
+            <Header />
+          </header>
+          <main className='main-sec'>
+            {children}
+          </main>
+        </body>
+      </ThemeProvider>
     </html>
   )
 }
